@@ -1,157 +1,125 @@
-# Banking System OOP Exercise
+# Banking System – Latihan OOP Java
 
-Tugas ini merupakan latihan pemrograman berorientasi objek (OOP) dalam bahasa Java yang mensimulasikan sistem perbankan sederhana. Program ini mengelola data nasabah (`Customer`), rekening bank (`Account`), serta operasi transaksi di tingkat bank (`Bank`). Tugas ini dikembangkan untuk memperkuat pemahaman mengenai relasi antar kelas, enkapsulasi, dan struktur data dinamis menggunakan `ArrayList`.
+Latihan pemrograman berorientasi objek (OOP) dalam bahasa Java yang mensimulasikan sistem perbankan sederhana. Program mengelola data nasabah (`Customer`), rekening bank (`Account`), dan operasi transaksi di tingkat bank (`Bank`).
+
+Tujuan latihan ini adalah memperkuat pemahaman tentang relasi antarkelas, enkapsulasi, dan struktur data dinamis menggunakan `ArrayList`.
 
 ---
 
-## 📂 Struktur File dan Folder
+## 📂 Struktur File
 
-```text
+```plaintext
 Tugas-PBO-Banking/
-│
-├── Account.java        # Mengelola saldo dan transaksi dasar (deposit & withdraw)
-├── Customer.java       # Menyimpan informasi nasabah dan daftar rekeningnya
-├── Bank.java           # Mengelola daftar nasabah, transaksi global, dan pencatatan
-└── BankDemo.java       # Kelas utama (main) untuk menjalankan simulasi pengujian
-
+├── Account.java    # Saldo dan transaksi dasar (deposit & withdraw)
+├── Customer.java   # Informasi nasabah dan daftar rekeningnya
+├── Bank.java       # Daftar nasabah, transaksi global, dan pencatatan
+└── BankDemo.java   # Kelas utama (main) untuk simulasi pengujian
 ```
 
 ---
 
-## 🏗️ Desain & Relasi Kelas (UML Relationship)
+## 🏗️ Desain dan Relasi Kelas
 
-Arsitektur program ini menerapkan konsep **Composition** dan **Association** dalam OOP:
+Arsitektur program menerapkan konsep **Composition** dan **Association**:
 
-* **`Bank` memiliki banyak `Customer**` (hubungan agregasi/komposisi menggunakan `ArrayList<Customer>`).
-* **`Customer` dapat memiliki banyak `Account**` (hubungan komposisi menggunakan `ArrayList<Account>`), memungkinkan satu nasabah mempunyai lebih dari satu rekening bank (misalnya rekening tabungan utama dan rekening investasi).
-* **`Account`** berdiri sendiri sebagai entitas privat yang memegang data saldo (`balance`) beserta aturan bisnis validasinya.
+```plaintext
+Bank  ──(1..*)──▶  Customer  ──(0..*)──▶  Account
+```
 
+- **`Bank`** memiliki banyak `Customer` (menggunakan `ArrayList<Customer>`).
+- **`Customer`** dapat memiliki banyak `Account` (menggunakan `ArrayList<Account>`), sehingga satu nasabah bisa memiliki lebih dari satu rekening, misalnya tabungan utama dan rekening investasi.
+- **`Account`** menyimpan data saldo (`balance`) secara privat beserta aturan validasinya.
 
+| Kelas | Atribut | Metode Utama |
+|---|---|---|
+| `Account` | `balance` | `getBalance()`, `deposit()`, `withdraw()` |
+| `Customer` | `firstName`, `lastName`, `accounts` | `getFirstName()`, `getLastName()`, `addAccount()`, `getAccount()`, `getNumOfAccounts()` |
+| `Bank` | `customers`, `numberOfCustomers`, `totalTransactions` (static) | `addCustomer()`, `getNumOfCustomers()`, `getCustomer()`, `deposit()`, `withdraw()` |
 
 ---
 
-## 🛠️ Prasyarat & Cara Menjalankan (Prerequisites & Usage)
+## 🛠️ Prasyarat
 
-Pastikan perangkat komputer Anda telah terinstal perangkat lunak berikut sebelum menjalankan program:
+- Java Development Kit (JDK) 8 atau lebih baru
+- Text editor atau IDE (IntelliJ IDEA, VS Code, Eclipse, dll.)
 
-* **Java Development Kit (JDK)** versi 8 atau versi terbaru.
-* Text editor atau IDE pilihan Anda (seperti **IntelliJ IDEA**, **VS Code**, atau **Eclipse**).
+## ▶️ Cara Menjalankan
 
-### Langkah-langkah Kompilasi dan Eksekusi via Terminal/CMD:
+1. Simpan keempat file (`Account.java`, `Customer.java`, `Bank.java`, `BankDemo.java`) dalam satu folder, misalnya `Tugas-PBO-Banking`.
 
-1. Simpan keempat file kelas (`Account.java`, `Customer.java`, `Bank.java`, dan `BankDemo.java`) ke dalam satu direktori folder yang sama (misalnya `Tugas-PBO-Banking`).
-2. Buka terminal atau Command Prompt, lalu arahkan direktori ke folder tersebut:
+2. Buka terminal/CMD dan masuk ke folder tersebut:
 ```bash
-cd path/to/Tugas-PBO-Banking
-
+   cd path/to/Tugas-PBO-Banking
 ```
 
-
-3. Kompilasi seluruh berkas kode sumber Java secara bersamaan:
+3. Kompilasi semua file sekaligus:
 ```bash
-javac *.java
-
+   javac *.java
 ```
 
-
-4. Jalankan program utama melalui kelas eksekusi `BankDemo`:
+4. Jalankan program:
 ```bash
-java BankDemo
-
+   java BankDemo
 ```
-
-
 
 ---
 
-## 💡 Penjelasan Kode & Konsep OOP
+## 💡 Penjelasan Kode dan Konsep OOP
 
 ### 1. `Account.java`
+Merepresentasikan rekening bank individu milik seorang nasabah.
 
-Kelas ini merepresentasikan rekening bank individu milik seorang nasabah.
-
-* **Atribut:** `balance` (tipe data `double`) yang bersifat privat untuk menjaga keamanan data saldo berjalan.
-
-
-* **Konstruktor:** Menginisialisasi saldo awal dengan validasi ketat. Jika saldo awal bernilai negatif, program akan mencetak pesan kesalahan dan otomatis menyetel saldo menjadi `0`.
-
-
-* **Metode Utama:**
-* `getBalance()`: Mengembalikan nilai saldo rekening saat ini.
-
-
-* `deposit(double amt)`: Menambahkan saldo jika nominal transaksi bernilai lebih dari 0 (`> 0`), mengembalikan nilai `true` jika berhasil dan `false` jika gagal.
-
-
-* `withdraw(double amt)`: Mengurangi saldo apabila nominal penarikan valid (`> 0`) dan saldo di rekening mencukupi (`amt <= balance`).
-
-
-
-
+- **Atribut:** `balance` (`double`), bersifat `private` untuk menjaga keamanan data saldo.
+- **Konstruktor:** menginisialisasi saldo awal dengan validasi. Jika saldo awal negatif, program mencetak pesan kesalahan dan menyetel saldo menjadi `0`.
+- **Metode:**
+  - `getBalance()`: mengembalikan saldo saat ini.
+  - `deposit(double amt)`: menambah saldo jika `amt > 0`; mengembalikan `true` jika berhasil dan `false` jika gagal.
+  - `withdraw(double amt)`: mengurangi saldo jika `amt > 0` dan saldo mencukupi (`amt <= balance`).
 
 ### 2. `Customer.java`
+Merepresentasikan nasabah atau pemilik rekening di bank.
 
-Kelas ini merepresentasikan nasabah atau pemilik akun di bank.
-
-* **Atribut:** `firstName`, `lastName`, serta `ArrayList<Account> accounts` untuk menampung daftar beberapa rekening yang dapat dimiliki oleh satu nasabah.
-
-
-* **Konstruktor:** Menginisialisasi nama depan (`firstName`) dan nama belakang (`lastName`) nasabah.
-
-
-* **Metode Utama:**
-* `getFirstName()` & `getLastName()`: Mengakses informasi nama nasabah.
-
-
-* `addAccount(Account acct)`: Menambahkan objek rekening baru ke dalam koleksi akun nasabah.
-* `getAccount(int index)`: Mengambil rekening tertentu berdasarkan indeks posisinya dengan aman.
-
-
-* `getNumOfAccounts()`: Mengembalikan total jumlah rekening yang aktif dimiliki oleh nasabah tersebut.
-
-
-
-
+- **Atribut:** `firstName`, `lastName`, dan `ArrayList<Account> accounts` untuk menampung beberapa rekening milik satu nasabah.
+- **Konstruktor:** menginisialisasi nama depan dan nama belakang.
+- **Metode:**
+  - `getFirstName()` dan `getLastName()`: mengakses nama nasabah.
+  - `addAccount(Account acct)`: menambahkan rekening baru ke daftar rekening nasabah.
+  - `getAccount(int index)`: mengambil rekening berdasarkan indeks.
+  - `getNumOfAccounts()`: mengembalikan jumlah rekening yang dimiliki nasabah.
 
 ### 3. `Bank.java`
+Merepresentasikan institusi bank yang mengelola koleksi nasabah.
 
-Kelas ini merepresentasikan institusi bank secara keseluruhan yang bertugas mengelola koleksi nasabah.
-
-* **Atribut:** `ArrayList<Customer> customers` (daftar nasabah), `numberOfCustomers`, serta variabel `static int totalTransactions` (variabel kelas untuk mencatat akumulasi total transaksi yang sukses terjadi di seluruh bank secara global).
-* **Metode Utama:**
-* `addCustomer(String f, String l)`: Membuat objek nasabah baru berdasarkan nama depan dan belakang, lalu mendaftarkannya ke dalam daftar nasabah bank.
-
-
-* `getNumOfCustomers()`: Mengembalikan jumlah total nasabah yang terdaftar pada bank tersebut.
-
-
-* `getCustomer(int index)`: Mengambil data referensi nasabah berdasarkan indeks tertentu.
-
-
-* `deposit(...)` & `withdraw(...)`: Memfasilitasi proses transaksi pada rekening spesifik milik nasabah dan secara otomatis menaikkan nilai penghitung `totalTransactions` jika transaksi berhasil dilakukan.
-
-
+- **Atribut:**
+  - `ArrayList<Customer> customers`: daftar nasabah.
+  - `numberOfCustomers`: jumlah nasabah terdaftar.
+  - `static int totalTransactions`: variabel kelas yang mencatat total transaksi sukses di seluruh bank secara global.
+- **Metode:**
+  - `addCustomer(String f, String l)`: membuat nasabah baru dari nama depan dan belakang, lalu mendaftarkannya ke bank.
+  - `getNumOfCustomers()`: mengembalikan jumlah nasabah terdaftar.
+  - `getCustomer(int index)`: mengambil nasabah berdasarkan indeks.
+  - `deposit(...)` dan `withdraw(...)`: memproses transaksi pada rekening tertentu dan menaikkan `totalTransactions` jika transaksi berhasil.
 
 ### 4. `BankDemo.java`
+Kelas pengujian (`main`) yang mensimulasikan skenario penggunaan sistem perbankan:
 
-Kelas pengujian (`main` method) yang mensimulasikan skenario nyata penggunaan sistem perbankan:
-
-* Menginisialisasi objek bank pertama (`bank1`) dan mendaftarkan nasabah bernama `Ghaitsa Rizky Amalia` beserta pembuatan dua rekening dengan saldo awal berbeda.
-* Melakukan serangkaian pengujian transaksi deposit dan penarikan tunai pada masing-masing rekening milik nasabah pertama.
-* Melanjutkan simulasi untuk bank dan nasabah kedua (`Jane Doe`) guna menguji independensi objek, skalabilitas `ArrayList`, serta akurasi penghitungan variabel statis `totalTransactions`.
+- Membuat bank pertama (`bank1`), mendaftarkan nasabah `Ghaitsa Rizky Amalia`, dan membuat dua rekening dengan saldo awal berbeda.
+- Menjalankan serangkaian deposit dan penarikan pada rekening nasabah pertama.
+- Melanjutkan simulasi dengan bank dan nasabah kedua (`Jane Doe`) untuk menguji independensi objek, skalabilitas `ArrayList`, dan akurasi variabel statis `totalTransactions`.
 
 ---
 
-## 🚀 Hasil Eksekusi (Output)
+## 🚀 Hasil Eksekusi
 
-Ketika program `BankDemo.java` dikompilasi dan dijalankan, output di terminal akan menampilkan rincian sebagai berikut:
+Saat `BankDemo` dikompilasi dan dijalankan, terminal menampilkan output berikut:
 
-<img width="1428" height="812" alt="image" src="https://github.com/user-attachments/assets/0c100644-c5c3-4647-99c7-114d3165549d" />
+<img width="1428" height="812" alt="Hasil eksekusi BankDemo" src="https://github.com/user-attachments/assets/0c100644-c5c3-4647-99c7-114d3165549d" />
 
 ---
 
 ## 👩‍💻 Author
 
-Nama: Ghaitsa Rizky Amalia
-
-NIM: F1D02510052
+| | |
+|---|---|
+| **Nama** | Ghaitsa Rizky Amalia |
+| **NIM** | F1D02510052 |
