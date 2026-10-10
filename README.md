@@ -1,10 +1,10 @@
 # Banking System OOP Exercise
 
-Proyek ini merupakan latihan pemrograman berorientasi objek (OOP) dalam bahasa Java yang mensimulasikan sistem perbankan sederhana. Program ini mengelola data nasabah (`Customer`), rekening bank (`Account`), serta operasi transaksi di tingkat bank (`Bank`). Proyek ini dikembangkan sebagai bagian dari materi praktikum Pemrograman Berorientasi Objek untuk memperkuat pemahaman mengenai relasi antar kelas, enkapsulasi, dan struktur data dinamis menggunakan `ArrayList`.
+Tugas ini merupakan latihan pemrograman berorientasi objek (OOP) dalam bahasa Java yang mensimulasikan sistem perbankan sederhana. Program ini mengelola data nasabah (`Customer`), rekening bank (`Account`), serta operasi transaksi di tingkat bank (`Bank`). Tugas ini dikembangkan untuk memperkuat pemahaman mengenai relasi antar kelas, enkapsulasi, dan struktur data dinamis menggunakan `ArrayList`.
 
 ---
 
-## 📂 Struktur File
+## 📂 Struktur File dan Folder
 
 ```text
 Tugas-PBO-Banking/
