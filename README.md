@@ -146,44 +146,7 @@ Kelas pengujian (`main` method) yang mensimulasikan skenario nyata penggunaan si
 
 Ketika program `BankDemo.java` dikompilasi dan dijalankan, output di terminal akan menampilkan rincian sebagai berikut:
 
-```text
-=== CEK DAFTAR AKUN AWAL ===
-Jumlah Akun: 2
-Akun 1 : Rp 100000
-Akun 2 : Rp 250000
------------------------------------
---- Transaksi Akun 1 ---
-Deposit Rp 500000 berhasil pada akun ke-1 milik Ghaitsa Rizky Amalia
-Withdraw Rp 150000 berhasil dari akun ke-1 milik Ghaitsa Rizky Amalia
---- Transaksi Akun 2 ---
-Deposit Rp 50000 berhasil pada akun ke-2 milik Ghaitsa Rizky Amalia
-Withdraw Rp 100000 berhasil dari akun ke-2 milik Ghaitsa Rizky Amalia
------------------------------------
-=== CEK SALDO AKHIR DAN TOTAL TRANSAKSI ===
-Saldo Akhir Akun 1: Rp 450000
-Saldo Akhir Akun 2: Rp 200000
-Total Transaksi Seluruh Akun: 4
-
-----------------------------------------------------------------------
-
-=== CEK DAFTAR AKUN AWAL ===
-Jumlah Akun: 2
-Akun 1 : Rp 200000
-Akun 2 : Rp 150000
------------------------------------
---- Transaksi Akun 1 ---
-Deposit Rp 100000 berhasil pada akun ke-1 milik Jane Doe
-Withdraw Rp 50000 berhasil dari akun ke-1 milik Jane Doe
---- Transaksi Akun 2 ---
-Deposit Rp 150000 berhasil pada akun ke-2 milik Jane Doe
-Withdraw Rp 50000 berhasil dari akun ke-2 milik Jane Doe
------------------------------------
-=== CEK SALDO AKHIR DAN TOTAL TRANSAKSI ===
-Saldo Akhir Akun 1: Rp 250000
-Saldo Akhir Akun 2: Rp 250000
-Total Transaksi Seluruh Akun: 8
-
-```
+<img width="1428" height="812" alt="image" src="https://github.com/user-attachments/assets/0c100644-c5c3-4647-99c7-114d3165549d" />
 
 ---
 
